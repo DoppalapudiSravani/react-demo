@@ -5,19 +5,27 @@ const intialState ={
     mobile:null,
 };
 function accountReducer(state=intialState,action){
-    if (action.type =="deposit")
-       return {...state,balance:state.balance+action.payload};
-       else if(action.type=="withdraw")
-       return{...state,balance:state.balance-action.payload};
-    return state
+    switch (action.type) {
+        case"deposit":
+    
+       return {...state,balance:state.balance+ +action.payload};
+       case"withdraw":
+       return{...state,balance:state.balance- +action.payload};
+       case "mobileUpdate":
+        return{...state,mobile: action.playload};
+        case "nameUpdate":
+         return{...state,fullName:action.payload};
+         case "reset":
+            return intialState;
+            default:
+                return state;
 
+              
     }
+}
     const store =createStore(accountReducer);
 
-    console.log(store.getState()) 
-    store.dispatch({type:"deposit",payload:1000})
-    console.log(store.getState())
-
+    export default store;
 
 
 
