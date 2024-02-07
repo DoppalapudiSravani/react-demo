@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import{useReducer} from "react";
+
+
+import {createStore} from "redux";
+const intialState ={
+    balance:0,
+    fullName:"",
+    mobile:null,
+};
+function accountReducer(state = intialState, action)  {
+    if (action.type =="deposit")
+       return {...state,balance:state.balance + action.payload};
+       else if(action.type=="withdraw")
+       return{...state,balance:state.balance - action.payload};
+      else if (action.type =="mobileUpdate")
+      return{...state,mobile:action.payload};
+      else
+    return state
+
+    }
+    const store = createStore(accountReducer);
+
+    console.log(store.getState()) 
+    store.dispatch({type:"deposit",payload:1000})
+    console.log(store.getState())
+    import './store'
+
+
+
+import './store'
+
+function  App  () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <center>
+        <h1>hello</h1>
+      </center>
     </div>
-  );
+  )
 }
-
-export default App;
+export default App
